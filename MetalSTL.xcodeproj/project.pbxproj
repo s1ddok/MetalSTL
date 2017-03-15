@@ -15,7 +15,47 @@
 		0894EF3E1E782EF700BD46AD /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF3D1E782EF700BD46AD /* Mesh.swift */; };
 		0894EF401E78300300BD46AD /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF3F1E78300300BD46AD /* Submesh.swift */; };
 		0894EF421E7925C500BD46AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF411E7925C500BD46AD /* Constants.swift */; };
+		0894EF4D1E79358F00BD46AD /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0894EF4A1E79357900BD46AD /* SwiftMath.framework */; };
+		0894EF4E1E79358F00BD46AD /* SwiftMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0894EF4A1E79357900BD46AD /* SwiftMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0894EF491E79357900BD46AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_41;
+			remoteInfo = SwiftMath;
+		};
+		0894EF4B1E79357900BD46AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_42;
+			remoteInfo = SwiftMathTests;
+		};
+		0894EF4F1E79358F00BD46AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_43;
+			remoteInfo = SwiftMath;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0894EF511E79358F00BD46AD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0894EF4E1E79358F00BD46AD /* SwiftMath.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0894EF281E782A8B00BD46AD /* MetalSTL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalSTL.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,6 +68,7 @@
 		0894EF3D1E782EF700BD46AD /* Mesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		0894EF3F1E78300300BD46AD /* Submesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
 		0894EF411E7925C500BD46AD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMath.xcodeproj; path = SwiftMath/SwiftMath.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0894EF4D1E79358F00BD46AD /* SwiftMath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,8 +111,18 @@
 				0894EF321E782A8B00BD46AD /* Assets.xcassets */,
 				0894EF341E782A8B00BD46AD /* LaunchScreen.storyboard */,
 				0894EF371E782A8B00BD46AD /* Info.plist */,
+				0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */,
 			);
 			path = MetalSTL;
+			sourceTree = "<group>";
+		};
+		0894EF451E79357900BD46AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0894EF4A1E79357900BD46AD /* SwiftMath.framework */,
+				0894EF4C1E79357900BD46AD /* SwiftMathTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,10 +135,12 @@
 				0894EF241E782A8B00BD46AD /* Sources */,
 				0894EF251E782A8B00BD46AD /* Frameworks */,
 				0894EF261E782A8B00BD46AD /* Resources */,
+				0894EF511E79358F00BD46AD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0894EF501E79358F00BD46AD /* PBXTargetDependency */,
 			);
 			name = MetalSTL;
 			productName = MetalSTL;
@@ -121,12 +175,35 @@
 			mainGroup = 0894EF1F1E782A8B00BD46AD;
 			productRefGroup = 0894EF291E782A8B00BD46AD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0894EF451E79357900BD46AD /* Products */;
+					ProjectRef = 0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0894EF271E782A8B00BD46AD /* MetalSTL */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0894EF4A1E79357900BD46AD /* SwiftMath.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftMath.framework;
+			remoteRef = 0894EF491E79357900BD46AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0894EF4C1E79357900BD46AD /* SwiftMathTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = file;
+			path = SwiftMathTests.xctest;
+			remoteRef = 0894EF4B1E79357900BD46AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0894EF261E782A8B00BD46AD /* Resources */ = {
@@ -155,6 +232,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0894EF501E79358F00BD46AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMath;
+			targetProxy = 0894EF4F1E79358F00BD46AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0894EF2F1E782A8B00BD46AD /* Main.storyboard */ = {
@@ -272,6 +357,7 @@
 		0894EF3B1E782A8B00BD46AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
 				INFOPLIST_FILE = MetalSTL/Info.plist;
@@ -285,6 +371,7 @@
 		0894EF3C1E782A8B00BD46AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
 				INFOPLIST_FILE = MetalSTL/Info.plist;

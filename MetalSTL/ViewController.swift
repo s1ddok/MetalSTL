@@ -8,6 +8,7 @@
 
 import UIKit
 import MetalKit
+import SwiftMath
 
 class ViewController: UIViewController {
     @IBOutlet var metalView: MTKView!
@@ -40,6 +41,14 @@ class ViewController: UIViewController {
 
 // ViewController will be the renderer as well
 extension ViewController: MTKViewDelegate {
+    public func render() {
+        
+    }
+    
+    public func reshape() {
+        
+    }
+    
     func draw(in view: MTKView) {
         
         
