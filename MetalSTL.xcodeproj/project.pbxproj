@@ -12,6 +12,9 @@
 		0894EF311E782A8B00BD46AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF2F1E782A8B00BD46AD /* Main.storyboard */; };
 		0894EF331E782A8B00BD46AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF321E782A8B00BD46AD /* Assets.xcassets */; };
 		0894EF361E782A8B00BD46AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF341E782A8B00BD46AD /* LaunchScreen.storyboard */; };
+		0894EF3E1E782EF700BD46AD /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF3D1E782EF700BD46AD /* Mesh.swift */; };
+		0894EF401E78300300BD46AD /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF3F1E78300300BD46AD /* Submesh.swift */; };
+		0894EF421E7925C500BD46AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF411E7925C500BD46AD /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		0894EF321E782A8B00BD46AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0894EF351E782A8B00BD46AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0894EF371E782A8B00BD46AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0894EF3D1E782EF700BD46AD /* Mesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
+		0894EF3F1E78300300BD46AD /* Submesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
+		0894EF411E7925C500BD46AD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 			children = (
 				0894EF2B1E782A8B00BD46AD /* AppDelegate.swift */,
 				0894EF2D1E782A8B00BD46AD /* ViewController.swift */,
+				0894EF3D1E782EF700BD46AD /* Mesh.swift */,
+				0894EF3F1E78300300BD46AD /* Submesh.swift */,
+				0894EF411E7925C500BD46AD /* Constants.swift */,
 				0894EF2F1E782A8B00BD46AD /* Main.storyboard */,
 				0894EF321E782A8B00BD46AD /* Assets.xcassets */,
 				0894EF341E782A8B00BD46AD /* LaunchScreen.storyboard */,
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0894EF421E7925C500BD46AD /* Constants.swift in Sources */,
+				0894EF3E1E782EF700BD46AD /* Mesh.swift in Sources */,
 				0894EF2E1E782A8B00BD46AD /* ViewController.swift in Sources */,
 				0894EF2C1E782A8B00BD46AD /* AppDelegate.swift in Sources */,
+				0894EF401E78300300BD46AD /* Submesh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
