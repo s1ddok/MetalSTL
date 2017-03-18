@@ -19,6 +19,9 @@
 		0894EF4E1E79358F00BD46AD /* SwiftMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0894EF4A1E79357900BD46AD /* SwiftMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0894EF531E7939BE00BD46AD /* Matrix4x4f+FOV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF521E7939BE00BD46AD /* Matrix4x4f+FOV.swift */; };
 		0894EF591E7DAD8700BD46AD /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF581E7DAD8700BD46AD /* Shaders.metal */; };
+		0894EF5D1E7DBDD900BD46AD /* realship.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF5A1E7DBDD900BD46AD /* realship.mtl */; };
+		0894EF5E1E7DBDD900BD46AD /* realship.obj in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF5B1E7DBDD900BD46AD /* realship.obj */; };
+		0894EF5F1E7DBDD900BD46AD /* shipDiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 0894EF5C1E7DBDD900BD46AD /* shipDiffuse.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMath.xcodeproj; path = SwiftMath/SwiftMath.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0894EF521E7939BE00BD46AD /* Matrix4x4f+FOV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4f+FOV.swift"; sourceTree = "<group>"; };
 		0894EF581E7DAD8700BD46AD /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		0894EF5A1E7DBDD900BD46AD /* realship.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = realship.mtl; sourceTree = "<group>"; };
+		0894EF5B1E7DBDD900BD46AD /* realship.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = realship.obj; sourceTree = "<group>"; };
+		0894EF5C1E7DBDD900BD46AD /* shipDiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shipDiffuse.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 				0894EF2F1E782A8B00BD46AD /* Main.storyboard */,
 				0894EF321E782A8B00BD46AD /* Assets.xcassets */,
 				0894EF341E782A8B00BD46AD /* LaunchScreen.storyboard */,
+				0894EF601E7DBDDE00BD46AD /* STLObject */,
 				0894EF371E782A8B00BD46AD /* Info.plist */,
 				0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */,
 			);
@@ -129,6 +136,16 @@
 				0894EF4C1E79357900BD46AD /* SwiftMathTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0894EF601E7DBDDE00BD46AD /* STLObject */ = {
+			isa = PBXGroup;
+			children = (
+				0894EF5A1E7DBDD900BD46AD /* realship.mtl */,
+				0894EF5B1E7DBDD900BD46AD /* realship.obj */,
+				0894EF5C1E7DBDD900BD46AD /* shipDiffuse.png */,
+			);
+			name = STLObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,9 +233,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0894EF5F1E7DBDD900BD46AD /* shipDiffuse.png in Resources */,
+				0894EF5E1E7DBDD900BD46AD /* realship.obj in Resources */,
 				0894EF361E782A8B00BD46AD /* LaunchScreen.storyboard in Resources */,
 				0894EF331E782A8B00BD46AD /* Assets.xcassets in Resources */,
 				0894EF311E782A8B00BD46AD /* Main.storyboard in Resources */,
+				0894EF5D1E7DBDD900BD46AD /* realship.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +429,7 @@
 				0894EF3C1E782A8B00BD46AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

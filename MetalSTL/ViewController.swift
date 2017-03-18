@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var shaderLibrary: MTLLibrary!
     var pipelineState: MTLRenderPipelineState!
     var depthState: MTLDepthStencilState!
+    var mtlVertexDescriptor: MTLVertexDescriptor!
     
     var viewMatrix: Matrix4x4f = .identity
     var projectionMatrix: Matrix4x4f = .identity
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupMetal()
+        loadAssets()
+        reshape()
     }
     
     private func setupMetal() {
@@ -48,6 +51,91 @@ class ViewController: UIViewController {
         metalView.sampleCount = 4
         metalView.preferredFramesPerSecond = 60
         metalView.depthStencilPixelFormat = .depth32Float_stencil8
+        
+        // Load the fragment program into the library.
+        let fragmentProgram = shaderLibrary.makeFunction(name: "fragmentLight")
+        
+        // Load the vertex program into the library.
+        let vertexProgram = shaderLibrary.makeFunction(name:"vertexLight")
+        
+        /*
+         Create a vertex descriptor for our Metal pipeline. Specifies the layout
+         of vertices the pipeline should expect.
+         */
+        mtlVertexDescriptor = MTLVertexDescriptor()
+        
+        // Positions.
+        mtlVertexDescriptor.attributes[VertexAttributes.position.rawValue].format = .float3
+        mtlVertexDescriptor.attributes[VertexAttributes.position.rawValue].offset = 0
+        mtlVertexDescriptor.attributes[VertexAttributes.position.rawValue].bufferIndex = BufferIndex.vertexBuffer.rawValue
+        
+        // Normals.
+        mtlVertexDescriptor.attributes[VertexAttributes.normal.rawValue].format = .float3
+        mtlVertexDescriptor.attributes[VertexAttributes.normal.rawValue].offset = 12
+        mtlVertexDescriptor.attributes[VertexAttributes.normal.rawValue].bufferIndex = BufferIndex.vertexBuffer.rawValue
+        
+        // Texture coordinates.
+        mtlVertexDescriptor.attributes[VertexAttributes.texcoord.rawValue].format = .half2
+        mtlVertexDescriptor.attributes[VertexAttributes.texcoord.rawValue].offset = 24
+        mtlVertexDescriptor.attributes[VertexAttributes.texcoord.rawValue].bufferIndex = BufferIndex.vertexBuffer.rawValue
+        
+        // Single interleaved buffer.
+        mtlVertexDescriptor.layouts[BufferIndex.vertexBuffer.rawValue].stride = 28
+        mtlVertexDescriptor.layouts[BufferIndex.vertexBuffer.rawValue].stepRate = 1
+        mtlVertexDescriptor.layouts[BufferIndex.vertexBuffer.rawValue].stepFunction = .perVertex
+        
+        // Create a reusable pipeline state
+        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
+        pipelineStateDescriptor.sampleCount = metalView.sampleCount
+        pipelineStateDescriptor.vertexFunction = vertexProgram
+        pipelineStateDescriptor.fragmentFunction = fragmentProgram
+        pipelineStateDescriptor.vertexDescriptor = mtlVertexDescriptor
+        pipelineStateDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+        pipelineStateDescriptor.depthAttachmentPixelFormat = metalView.depthStencilPixelFormat
+        pipelineStateDescriptor.stencilAttachmentPixelFormat = metalView.depthStencilPixelFormat
+        
+        pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+        
+        if pipelineState == nil {
+            fatalError("Failed to create pipeline state")
+        }
+        
+        let depthStateDesc = MTLDepthStencilDescriptor()
+        depthStateDesc.depthCompareFunction = .less
+        depthStateDesc.isDepthWriteEnabled = true
+        depthState = device.makeDepthStencilState(descriptor: depthStateDesc)
+    }
+    
+    private func loadAssets() {
+        /*
+         From our Metal vertex descriptor, create a Model I/O vertex descriptor we'll
+         load our asset with. This specifies the layout of vertices Model I/O should
+         format loaded meshes with.
+         */
+        let mdlVertexDescriptor = MTKModelIOVertexDescriptorFromMetal(mtlVertexDescriptor)
+        (mdlVertexDescriptor.attributes[VertexAttributes.position.rawValue] as! MDLVertexAttribute).name = MDLVertexAttributePosition
+        (mdlVertexDescriptor.attributes[VertexAttributes.normal.rawValue] as! MDLVertexAttribute).name = MDLVertexAttributeNormal
+        (mdlVertexDescriptor.attributes[VertexAttributes.texcoord.rawValue] as! MDLVertexAttribute).name = MDLVertexAttributeTextureCoordinate
+        
+        let bufferAllocator = MTKMeshBufferAllocator(device: device)
+        
+        guard let assetURL = Bundle.main.url(forResource: "realship", withExtension: "obj") else {
+            fatalError("Error: Can't find asset to load.")
+        }
+        
+        /*
+         Load Model I/O Asset with mdlVertexDescriptor, specifying vertex layout and
+         bufferAllocator enabling ModelIO to load vertex and index buffers directory
+         into Metal GPU memory.
+         */
+        let asset = MDLAsset(url: assetURL, vertexDescriptor: mdlVertexDescriptor, bufferAllocator: bufferAllocator)
+    
+        var mdlMeshes: NSArray? = NSArray()
+        let mtkMeshes = try! MTKMesh.newMeshes(from: asset, device: device, sourceMeshes: &mdlMeshes)
+        
+        for i in 0..<mtkMeshes.count {
+            meshes.append(Mesh(mesh: mtkMeshes[i], mdlMesh: mdlMeshes!.object(at: i) as! MDLMesh, device: device))
+        }
     }
 
 }
@@ -99,7 +187,7 @@ extension ViewController: MTKViewDelegate {
         
         // Finalize rendering here & push the command buffer to the GPU.
         commandBuffer.commit()
-        
+ 
         // Very bad, better use semaphore to dispatch inflight frames
         // But for now we will leave that as is.
         commandBuffer.waitUntilCompleted()

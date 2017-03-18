@@ -10,7 +10,7 @@ import SwiftMath
 
 /// Indices of vertex attribute in descriptor.
 enum VertexAttributes: Int {
-    case osition = 0, normal, texcoord
+    case position = 0, normal, texcoord
 }
 
 /// Indices for texture bind points.
@@ -34,7 +34,7 @@ struct FrameUniforms {
 
 /// Material uniforms.
 struct MaterialUniforms {
-    var emissiveColor, diffuseColor, specularColot: Vector4f
+    var emissiveColor, diffuseColor, specularColor: Vector4f
     
     var specularIntensity, pad1, pad2, pad3: Float
 };
