@@ -17,6 +17,8 @@
 		0894EF421E7925C500BD46AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF411E7925C500BD46AD /* Constants.swift */; };
 		0894EF4D1E79358F00BD46AD /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0894EF4A1E79357900BD46AD /* SwiftMath.framework */; };
 		0894EF4E1E79358F00BD46AD /* SwiftMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0894EF4A1E79357900BD46AD /* SwiftMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0894EF531E7939BE00BD46AD /* Matrix4x4f+FOV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF521E7939BE00BD46AD /* Matrix4x4f+FOV.swift */; };
+		0894EF591E7DAD8700BD46AD /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0894EF581E7DAD8700BD46AD /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		0894EF3F1E78300300BD46AD /* Submesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
 		0894EF411E7925C500BD46AD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0894EF441E79357900BD46AD /* SwiftMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMath.xcodeproj; path = SwiftMath/SwiftMath.xcodeproj; sourceTree = SOURCE_ROOT; };
+		0894EF521E7939BE00BD46AD /* Matrix4x4f+FOV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4f+FOV.swift"; sourceTree = "<group>"; };
+		0894EF581E7DAD8700BD46AD /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				0894EF3D1E782EF700BD46AD /* Mesh.swift */,
 				0894EF3F1E78300300BD46AD /* Submesh.swift */,
 				0894EF411E7925C500BD46AD /* Constants.swift */,
+				0894EF521E7939BE00BD46AD /* Matrix4x4f+FOV.swift */,
+				0894EF581E7DAD8700BD46AD /* Shaders.metal */,
 				0894EF2F1E782A8B00BD46AD /* Main.storyboard */,
 				0894EF321E782A8B00BD46AD /* Assets.xcassets */,
 				0894EF341E782A8B00BD46AD /* LaunchScreen.storyboard */,
@@ -223,6 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0894EF531E7939BE00BD46AD /* Matrix4x4f+FOV.swift in Sources */,
+				0894EF591E7DAD8700BD46AD /* Shaders.metal in Sources */,
 				0894EF421E7925C500BD46AD /* Constants.swift in Sources */,
 				0894EF3E1E782EF700BD46AD /* Mesh.swift in Sources */,
 				0894EF2E1E782A8B00BD46AD /* ViewController.swift in Sources */,

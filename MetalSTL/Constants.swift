@@ -6,7 +6,7 @@
 //  Copyright © 2017 s1ddok. All rights reserved.
 //
 
-import simd
+import SwiftMath
 
 /// Indices of vertex attribute in descriptor.
 enum VertexAttributes: Int {
@@ -25,16 +25,16 @@ enum BufferIndex: Int {
 
 /// Per frame uniforms.
 struct FrameUniforms {
-    var model: float4x4
-    var view: float4x4
-    var projection: float4x4
-    var projectionView: float4x4
-    var normal: float4x4
+    var model: Matrix4x4f
+    var view: Matrix4x4f
+    var projection: Matrix4x4f
+    var projectionView: Matrix4x4f
+    var normal: Matrix4x4f
 }
 
 /// Material uniforms.
-struct AAPLMaterialUniforms {
-    var emissiveColor, diffuseColor, specularColot: float4
+struct MaterialUniforms {
+    var emissiveColor, diffuseColor, specularColot: Vector4f
     
     var specularIntensity, pad1, pad2, pad3: Float
 };
