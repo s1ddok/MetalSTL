@@ -16,11 +16,16 @@ class ViewController: UIViewController {
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var shaderLibrary: MTLLibrary!
+    var pipelineState: MTLRenderPipelineState!
+    var depthState: MTLDepthStencilState!
     
     var viewMatrix: Matrix4x4f = .identity
     var projectionMatrix: Matrix4x4f = .identity
     
     var rotation: Angle = .zero
+    var meshes: [Mesh] = []
+    
+    var frameUniformsBuffer: MTLBuffer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,11 +59,50 @@ extension ViewController: MTKViewDelegate {
         let modelViewMatrix = viewMatrix * modelMatrix
         var frameData   = FrameUniforms(model: modelMatrix, view: viewMatrix, projection: .identity, projectionView: projectionMatrix * modelViewMatrix, normal: modelViewMatrix.transposed.inversed)
     
+        frameUniformsBuffer = device.makeBuffer(bytes: &frameData, length: MemoryLayout<FrameUniforms>.size, options: .optionCPUCacheModeWriteCombined)
         rotation += 1°
     }
     
     public func render() {
+        // Perofm any app logic, including updating any Metal buffers.
+        update()
         
+        // Create a new command buffer for each renderpass to the current drawable.
+        let commandBuffer = commandQueue.makeCommandBuffer()
+        
+        // Obtain a renderPassDescriptor generated from the view's drawable textures.
+        guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
+            fatalError("Error while trying to obtain current render pass descriptor from MTKView")
+        }
+        
+        // Create a render command encoder so we can render into something.
+        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+        
+        // Set context state.
+        renderEncoder.setViewport(MTLViewport(originX: 0, originY: 0, width: Double(metalView.drawableSize.width), height: Double(metalView.drawableSize.height), znear: 0, zfar: 1))
+        renderEncoder.setDepthStencilState(depthState)
+        renderEncoder.setRenderPipelineState(pipelineState)
+        
+        // Set the our per frame uniforms.
+        renderEncoder.setVertexBuffer(frameUniformsBuffer, offset: 0, at: BufferIndex.frameUniformBuffer.rawValue)
+        
+        // Render each of our meshes.
+        for mesh in meshes {
+            mesh.render(with: renderEncoder)
+        }
+        
+        // We're done encoding commands.
+        renderEncoder.endEncoding()
+        
+        // Schedule a present once the framebuffer is complete using the current drawable.
+        commandBuffer.present(metalView.currentDrawable!)
+        
+        // Finalize rendering here & push the command buffer to the GPU.
+        commandBuffer.commit()
+        
+        // Very bad, better use semaphore to dispatch inflight frames
+        // But for now we will leave that as is.
+        commandBuffer.waitUntilCompleted()
     }
     
     /*
