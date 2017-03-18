@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     var viewMatrix: Matrix4x4f = .identity
     var projectionMatrix: Matrix4x4f = .identity
     
-    var rotation: Angle = .zero
+    var rotationX: Angle = .zero
+    var rotationY: Angle = .zero
     var meshes: [Mesh] = []
     
     var frameUniformsBuffer: MTLBuffer!
@@ -143,12 +144,11 @@ class ViewController: UIViewController {
 // ViewController will be the renderer as well
 extension ViewController: MTKViewDelegate {
     public func update() {
-        let modelMatrix = Matrix4x4f.translate(tx: 0, ty: 0, tz: 2) * Matrix4x4f.rotate(x: rotation)
+        let modelMatrix = Matrix4x4f.translate(tx: 0, ty: 0, tz: 2) * Matrix4x4f.rotate(x: rotationX, y: rotationY)
         let modelViewMatrix = viewMatrix * modelMatrix
         var frameData   = FrameUniforms(model: modelMatrix, view: viewMatrix, projection: .identity, projectionView: projectionMatrix * modelViewMatrix, normal: modelViewMatrix.transposed.inversed)
     
         frameUniformsBuffer = device.makeBuffer(bytes: &frameData, length: MemoryLayout<FrameUniforms>.size, options: .optionCPUCacheModeWriteCombined)
-        rotation += 1°
     }
     
     public func render() {
@@ -212,5 +212,24 @@ extension ViewController: MTKViewDelegate {
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         self.reshape()
+    }
+}
+
+extension ViewController {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let previousLocation = touch.previousLocation(in: metalView)
+        let currentLocation = touch.location(in: metalView)
+        
+        let dx = Float(currentLocation.x - previousLocation.x)
+        let dy = Float(currentLocation.y - previousLocation.y)
+        
+        // reversed for landscape orientation
+        // don't kill me for that
+        rotationX += 0.5° * dy
+        rotationY += 0.5° * dx
     }
 }
